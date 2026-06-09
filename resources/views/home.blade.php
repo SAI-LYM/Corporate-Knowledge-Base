@@ -15,30 +15,28 @@
             Project Registry come next.
         </p>
 
-        {{-- Module preview cards --}}
+        {{-- Module preview cards — sign in to enter each module. --}}
         <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ([
                 ['Onboarding Hub', 'คู่มือพนักงานใหม่', 'Role-filtered first-week guides & checklists.'],
                 ['Knowledge Base', 'ฐานความรู้', 'Searchable articles by department, category & tag.'],
                 ['Project Registry', 'ทะเบียนโปรเจกต์', 'Internal repos, tech specs & READMEs.'],
             ] as [$en, $th, $desc])
-                <div class="rounded-lg border border-gray-200 bg-mon-surface p-5 transition hover:bg-mon-tint">
+                <a href="{{ route('login') }}"
+                    class="block rounded-lg border border-gray-200 bg-mon-surface p-5 transition hover:bg-mon-tint">
                     <h2 class="font-semibold text-mon-primary">{{ $en }}</h2>
                     <p class="text-sm text-gray-500">{{ $th }}</p>
                     <p class="mt-2 text-sm text-gray-600">{{ $desc }}</p>
-                </div>
+                </a>
             @endforeach
         </div>
 
-        {{-- Button sample (proves brand color + hover token) --}}
-        <div class="mt-8 flex flex-wrap items-center gap-3">
-            <button type="button"
-                class="rounded-md bg-mon-primary px-5 py-2.5 font-medium text-white transition hover:bg-mon-primary-hover">
-                Primary action
-            </button>
-            <span class="inline-flex items-center rounded-md bg-mon-success/10 px-3 py-1 text-sm font-medium text-mon-success">
-                Theme loaded ✓
-            </span>
+        {{-- Primary call to action --}}
+        <div class="mt-8">
+            <a href="{{ route('login') }}"
+                class="inline-flex rounded-md bg-mon-primary px-5 py-2.5 font-medium text-white transition hover:bg-mon-primary-hover">
+                Sign in to get started
+            </a>
         </div>
     </div>
 @endsection

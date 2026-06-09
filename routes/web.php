@@ -5,7 +5,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\KnowledgeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => view('home'))->name('home');
+// Landing page for guests; logged-in users go straight to their dashboard hub.
+Route::get('/', fn () => auth()->check()
+    ? redirect()->route('dashboard')
+    : view('home'))->name('home');
 
 // ---- Guest auth routes -----------------------------------------------------
 Route::middleware('guest')->group(function () {
