@@ -1,0 +1,23 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+// Many-to-many: articles <-> tags (CLAUDE.md §3 "Relational, not flat").
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('article_tag', function (Blueprint $table) {
+            $table->foreignId('article_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('tag_id')->constrained()->cascadeOnDelete();
+            $table->primary(['article_id', 'tag_id']); // composite PK = no duplicate links
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('article_tag');
+    }
+};

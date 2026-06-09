@@ -16,7 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            // Nullable: OAuth (Entra ID) and mock-driver users have no local password.
+            // The legacy plain-text pattern is forbidden; local passwords (if ever) are bcrypt.
+            $table->string('password')->nullable();
+            // Microsoft Entra ID object id — set on OAuth login, null for mock/local users.
+            $table->string('azure_oid')->nullable()->unique();
+            // RBAC axes (CLAUDE.md §1): roles/departments created before this table.
+            $table->foreignId('role_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('department_id')->nullable()->constrained()->nullOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });
