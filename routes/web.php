@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AzureController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\OnboardingController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 // Landing page for guests; logged-in users go straight to their dashboard hub.
@@ -35,4 +36,8 @@ Route::middleware('auth')->group(function () {
     // Onboarding Hub — the logged-in user's own checklist.
     Route::get('/onboarding', [OnboardingController::class, 'index'])->name('onboarding.index');
     Route::post('/onboarding/{item}/toggle', [OnboardingController::class, 'toggle'])->name('onboarding.toggle');
+
+    // Project Registry — advanced/Senior; reads filtered by Project::visibleTo($user).
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projects.show');
 });
