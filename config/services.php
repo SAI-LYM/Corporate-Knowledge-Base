@@ -35,4 +35,13 @@ return [
         ],
     ],
 
+    // Microsoft Entra ID (Azure AD) — primary OAuth login via Socialite (CLAUDE.md §3).
+    'azure' => [
+        'client_id' => env('AZURE_CLIENT_ID'),
+        'client_secret' => env('AZURE_CLIENT_SECRET'),
+        'redirect' => env('AZURE_REDIRECT_URI'),
+        // Single-tenant: set AZURE_TENANT_ID; defaults to "common" for dev.
+        'tenant' => env('AZURE_TENANT_ID', 'common'),
+    ],
+
 ];

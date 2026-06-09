@@ -27,10 +27,29 @@
                     </span>
                 </a>
 
-                {{-- Slot for nav / user menu in later steps --}}
-                @hasSection('header-actions')
-                    <div class="flex items-center gap-3">@yield('header-actions')</div>
-                @endif
+                {{-- Auth status / user menu --}}
+                <div class="flex items-center gap-3">
+                    @auth
+                        <div class="hidden text-right sm:block">
+                            <span class="block text-sm font-medium text-gray-800">{{ auth()->user()->name }}</span>
+                            <span class="block text-xs text-gray-500">
+                                {{ auth()->user()->role?->name ?? 'Fresher' }} · {{ auth()->user()->department?->name ?? '—' }}
+                            </span>
+                        </div>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit"
+                                class="rounded-md border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-mon-surface">
+                                Log out
+                            </button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}"
+                            class="rounded-md bg-mon-primary px-4 py-1.5 text-sm font-medium text-white transition hover:bg-mon-primary-hover">
+                            Log in
+                        </a>
+                    @endauth
+                </div>
             </div>
         </header>
 
