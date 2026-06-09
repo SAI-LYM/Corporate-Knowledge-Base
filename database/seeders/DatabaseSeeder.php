@@ -9,8 +9,8 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database (CLAUDE.md §3 — local/dev demo data).
      *
-     * Reference data + mock users first; content (categories, tags, articles,
-     * projects, onboarding checklist) is added by the content seeders in Prompt 5.
+     * Order matters: reference data (roles, departments) → users → content
+     * (categories, tags, articles, projects, onboarding checklist + progress).
      */
     public function run(): void
     {
@@ -18,6 +18,11 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             DepartmentSeeder::class,
             UserSeeder::class,
+            CategorySeeder::class,
+            TagSeeder::class,
+            ArticleSeeder::class,
+            ProjectSeeder::class,
+            OnboardingChecklistSeeder::class,
         ]);
     }
 }
