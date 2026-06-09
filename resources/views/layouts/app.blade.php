@@ -20,9 +20,9 @@
         <header class="rounded-mon-card bg-white shadow-mon-card px-6 py-4 md:px-8 md:py-5">
             <div class="flex items-center justify-between gap-4">
                 <a href="{{ url('/') }}" class="flex items-center gap-3">
-                    <img src="{{ asset('images/MONLogo.png') }}" alt="MON Logistics" class="h-10 w-auto md:h-12">
-                    <span class="hidden sm:block">
-                        <span class="block text-lg font-semibold leading-tight text-mon-primary">MON Knowledge Hub</span>
+                    <img src="{{ asset('images/mon-logo.png') }}" alt="MON Logistics" class="h-9 w-auto md:h-10">
+                    <span class="hidden border-l border-gray-200 pl-3 sm:block">
+                        <span class="block text-base font-semibold leading-tight text-mon-primary">Knowledge Hub</span>
                         <span class="block text-xs text-gray-500">Internal Developer Portal · ศูนย์ความรู้ภายใน</span>
                     </span>
                 </a>
