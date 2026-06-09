@@ -367,8 +367,8 @@ Project Registry — all MON-themed (§4), all gated by real RBAC (§3).
 | `laravel/framework` | `12.x` (pin patch on install, e.g. `12.61.x`) | Framework |
 | `laravel/socialite` | `5.27.0` | OAuth client |
 | `socialiteproviders/microsoft-azure` | `5.2.0` | Microsoft Entra ID provider |
-| `league/commonmark` | `2.x` | Markdown → HTML (via `Str::markdown()`) |
-| `mews/purifier` | `3.x` | HTML sanitization (XSS defence) |
+| `league/commonmark` | `2.8.2` | Markdown → HTML (via `Str::markdown()`) |
+| `mews/purifier` | `3.4.4` | HTML sanitization (XSS defence) |
 | `tailwindcss` + `@tailwindcss/vite` | `4.3.0` (CSS-first `@theme`, no `tailwind.config.js`) | Styling (MON tokens) |
 | `vite` + `laravel-vite-plugin` | `vite 6.4.3` + `laravel-vite-plugin 1.3.0` | Asset build |
 | `laravel/pint` (dev) | pin on install | Code style |

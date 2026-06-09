@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AzureController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\KnowledgeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => view('home'))->name('home');
@@ -22,4 +23,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+    // Knowledge Base — all reads filtered by Article::visibleTo($user).
+    Route::get('/knowledge', [KnowledgeController::class, 'index'])->name('knowledge.index');
+    Route::get('/knowledge/{slug}', [KnowledgeController::class, 'show'])->name('knowledge.show');
 });
