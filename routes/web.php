@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AzureController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\KnowledgeController;
+use App\Http\Controllers\OnboardingController;
 use Illuminate\Support\Facades\Route;
 
 // Landing page for guests; logged-in users go straight to their dashboard hub.
@@ -30,4 +31,8 @@ Route::middleware('auth')->group(function () {
     // Knowledge Base — all reads filtered by Article::visibleTo($user).
     Route::get('/knowledge', [KnowledgeController::class, 'index'])->name('knowledge.index');
     Route::get('/knowledge/{slug}', [KnowledgeController::class, 'show'])->name('knowledge.show');
+
+    // Onboarding Hub — the logged-in user's own checklist.
+    Route::get('/onboarding', [OnboardingController::class, 'index'])->name('onboarding.index');
+    Route::post('/onboarding/{item}/toggle', [OnboardingController::class, 'toggle'])->name('onboarding.toggle');
 });

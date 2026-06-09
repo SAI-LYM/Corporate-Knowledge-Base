@@ -46,10 +46,12 @@
                 <p class="text-sm text-gray-500">ฐานความรู้</p>
                 <p class="mt-2 text-sm text-gray-600">Search articles filtered to your role &amp; department.</p>
             </a>
-            <div class="rounded-lg border border-dashed border-gray-200 p-5 text-gray-400">
-                <h2 class="font-semibold">Onboarding Hub</h2>
-                <p class="text-sm">Coming next</p>
-            </div>
+            <a href="{{ route('onboarding.index') }}"
+                class="rounded-lg border border-gray-200 bg-mon-surface p-5 transition hover:bg-mon-tint">
+                <h2 class="font-semibold text-mon-primary">Onboarding Hub</h2>
+                <p class="text-sm text-gray-500">คู่มือพนักงานใหม่</p>
+                <p class="mt-2 text-sm text-gray-600">Your first-week checklist &amp; progress.</p>
+            </a>
             <div class="rounded-lg border border-dashed border-gray-200 p-5 text-gray-400">
                 <h2 class="font-semibold">Project Registry</h2>
                 <p class="text-sm">Coming next</p>
