@@ -4,9 +4,34 @@
 @source '../../storage/framework/views/*.php';
 @source "../**/*.blade.php";
 @source "../**/*.js";
-@source "../**/*.vue";
 
+/*
+ | MON Logistics design tokens (single source of truth — see CLAUDE.md §4).
+ | Extracted from the legacy sample/common.css; expressed as Tailwind v4 theme
+ | variables so utilities like bg-mon-primary / text-mon-primary / shadow-mon-card
+ | are generated automatically. Blade references tokens, never raw hex.
+ */
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Brand palette */
+    --color-mon-primary: #0066a1;
+    --color-mon-primary-hover: #004d7a;
+    --color-mon-primary-dark: #003d66;
+    --color-mon-success: #28a745;
+    --color-mon-danger: #dc3545;
+    --color-mon-surface: #f8f9fa;
+    --color-mon-tint: #f0f8ff;
+    --color-mon-tint-hover: #e6f2ff;
+
+    /* Card shape */
+    --radius-mon-card: 10px;
+    --shadow-mon-card: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+    /* Typography — Prompt renders Thai + Latin cleanly (loaded via Google Fonts) */
+    --font-sans: 'Prompt', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* MON brand gradient — login / page background (see CLAUDE.md §4). */
+@utility bg-mon-gradient {
+    background-image: linear-gradient(135deg, #0066a1 0%, #003d66 100%);
 }
