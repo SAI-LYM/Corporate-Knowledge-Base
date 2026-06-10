@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\AzureController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\KnowledgeController;
@@ -40,4 +44,18 @@ Route::middleware('auth')->group(function () {
     // Project Registry — advanced/Senior; reads filtered by Project::visibleTo($user).
     Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projects.show');
+
+    // ---- Admin area — Admin role only (whole group gated; writes also gated by Policy) --
+    Route::middleware('role:Admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+        // Manage users: assign role + department.
+        Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+        Route::get('/users/{user}/edit', [AdminUserController::class, 'edit'])->name('users.edit');
+        Route::put('/users/{user}', [AdminUserController::class, 'update'])->name('users.update');
+
+        // Full CRUD for Articles and Projects.
+        Route::resource('articles', AdminArticleController::class)->except(['show']);
+        Route::resource('projects', AdminProjectController::class)->except(['show']);
+    });
 });

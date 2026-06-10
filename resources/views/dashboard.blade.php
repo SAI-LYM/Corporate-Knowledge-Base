@@ -66,5 +66,15 @@
                 </div>
             @endif
         </div>
+
+        @if ($user->isAdmin())
+            <div class="mt-4">
+                <a href="{{ route('admin.dashboard') }}"
+                    class="inline-flex items-center gap-2 rounded-lg border border-mon-primary/30 bg-mon-tint px-5 py-3 text-sm font-medium text-mon-primary transition hover:bg-mon-tint-hover">
+                    ⚙ Admin panel
+                    <span class="text-xs font-normal text-gray-500">manage users &amp; content</span>
+                </a>
+            </div>
+        @endif
     </div>
 @endsection
