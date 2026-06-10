@@ -41,9 +41,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/onboarding', [OnboardingController::class, 'index'])->name('onboarding.index');
     Route::post('/onboarding/{item}/toggle', [OnboardingController::class, 'toggle'])->name('onboarding.toggle');
 
-    // Project Registry — advanced/Senior; reads filtered by Project::visibleTo($user).
-    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
-    Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projects.show');
+    // Project Registry — Senior+ only (Freshers get 403); reads still filtered by
+    // Project::visibleTo($user) so cross-department/advanced items stay hidden.
+    Route::middleware('role:Senior')->group(function () {
+        Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+        Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projects.show');
+    });
 
     // ---- Admin area — Admin role only (whole group gated; writes also gated by Policy) --
     Route::middleware('role:Admin')->prefix('admin')->name('admin.')->group(function () {

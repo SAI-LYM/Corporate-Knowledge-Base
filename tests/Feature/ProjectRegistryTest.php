@@ -32,20 +32,20 @@ class ProjectRegistryTest extends TestCase
         return User::where('email', 'somchai.jaidee@company.com')->first();
     }
 
-    public function test_fresher_sees_no_projects_in_index(): void
+    public function test_fresher_is_forbidden_from_the_project_registry(): void
     {
+        // Project Registry is Senior+ only — a Fresher gets 403 (not an empty list).
         $this->actingAs($this->fresherIsd())
             ->get(route('projects.index'))
-            ->assertOk()
-            ->assertSee('No projects are visible')
-            ->assertDontSee('WMS (Infor) Integration Layer');
+            ->assertForbidden();
     }
 
     public function test_fresher_cannot_open_a_project_by_url(): void
     {
+        // Blocked by role:Senior middleware before reaching the visibleTo scope.
         $this->actingAs($this->fresherIsd())
             ->get(route('projects.show', 'wms-infor-integration-layer'))
-            ->assertNotFound();
+            ->assertForbidden();
     }
 
     public function test_senior_sees_and_can_open_projects(): void
