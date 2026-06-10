@@ -27,7 +27,7 @@ class OAuthDomainTest extends TestCase
 
     private function fakeAzureUser(string $email): void
     {
-        $socialiteUser = new SocialiteUser();
+        $socialiteUser = new SocialiteUser;
         $socialiteUser->id = 'oid-'.md5($email);
         $socialiteUser->name = 'External Person';
         $socialiteUser->email = $email;

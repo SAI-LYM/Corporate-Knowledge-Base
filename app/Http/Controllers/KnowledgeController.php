@@ -29,16 +29,12 @@ class KnowledgeController extends Controller
 
         $articles = Article::visibleTo($request->user())
             ->with(['department', 'category', 'author', 'tags'])
-            ->when($filters['department'] ?? null, fn ($query, $code) =>
-                $query->whereHas('department', fn ($q) => $q->where('code', $code)))
-            ->when($filters['category'] ?? null, fn ($query, $slug) =>
-                $query->whereHas('category', fn ($q) => $q->where('slug', $slug)))
-            ->when($filters['tag'] ?? null, fn ($query, $slug) =>
-                $query->whereHas('tags', fn ($q) => $q->where('slug', $slug)))
-            ->when($filters['q'] ?? null, fn ($query, $term) =>
-                $query->where(fn ($q) => $q
-                    ->where('title', 'like', "%{$term}%")
-                    ->orWhere('body_markdown', 'like', "%{$term}%")))
+            ->when($filters['department'] ?? null, fn ($query, $code) => $query->whereHas('department', fn ($q) => $q->where('code', $code)))
+            ->when($filters['category'] ?? null, fn ($query, $slug) => $query->whereHas('category', fn ($q) => $q->where('slug', $slug)))
+            ->when($filters['tag'] ?? null, fn ($query, $slug) => $query->whereHas('tags', fn ($q) => $q->where('slug', $slug)))
+            ->when($filters['q'] ?? null, fn ($query, $term) => $query->where(fn ($q) => $q
+                ->where('title', 'like', "%{$term}%")
+                ->orWhere('body_markdown', 'like', "%{$term}%")))
             ->latest()
             ->paginate(9)
             ->withQueryString();

@@ -26,7 +26,7 @@ class AzureUserProvisioner
             ?? User::where('email', $email)->first();
 
         if (! $user) {
-            $user = new User();
+            $user = new User;
             $user->role_id = Role::where('name', Role::FRESHER)->value('id'); // default on first login
         }
 

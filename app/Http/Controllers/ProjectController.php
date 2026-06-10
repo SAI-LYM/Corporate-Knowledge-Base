@@ -19,10 +19,9 @@ class ProjectController extends Controller
     {
         $projects = Project::visibleTo($request->user())
             ->with(['owner', 'department'])
-            ->when($request->query('q'), fn ($query, $term) =>
-                $query->where(fn ($q) => $q
-                    ->where('name', 'like', "%{$term}%")
-                    ->orWhere('tech_stack', 'like', "%{$term}%")))
+            ->when($request->query('q'), fn ($query, $term) => $query->where(fn ($q) => $q
+                ->where('name', 'like', "%{$term}%")
+                ->orWhere('tech_stack', 'like', "%{$term}%")))
             ->latest()
             ->paginate(9)
             ->withQueryString();

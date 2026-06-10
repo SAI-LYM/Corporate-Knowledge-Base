@@ -39,7 +39,7 @@ class Document extends Model
     ];
 
     protected $casts = [
-        'min_role'   => 'integer',
+        'min_role' => 'integer',
         'view_count' => 'integer',
     ];
 

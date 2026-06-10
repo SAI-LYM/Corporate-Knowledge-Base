@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -71,7 +72,7 @@ class ProjectRegistryTest extends TestCase
 
     public function test_readme_is_rendered_xss_safe(): void
     {
-        $project = \App\Models\Project::where('slug', 'wms-infor-integration-layer')->first();
+        $project = Project::where('slug', 'wms-infor-integration-layer')->first();
         $project->update([
             'readme_markdown' => "# Readme\n\n<script>alert('proj-pwned')</script>\n\n[x](javascript:alert(1))",
         ]);
